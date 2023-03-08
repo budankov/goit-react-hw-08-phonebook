@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-size: 18px;
+}
+
+input {
+  width: 100%;
+  outline: 0;
+  padding: 0px 7px;
+  border: none;
+  border-radius: 4px;
+}

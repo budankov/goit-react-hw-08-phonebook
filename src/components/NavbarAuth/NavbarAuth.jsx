@@ -10,12 +10,12 @@ const NavbarAuth = () => {
     <div className={styles.container}>
       <NavLink to="/login" className={styles.link}>
         <div className={styles.wrapper}>
-          <LoginIcon sx={{ fontSize: 16, marginRight: 0.75 }}></LoginIcon>Login
+          <LoginIcon sx={{ fontSize: 26, marginRight: 0.75 }}></LoginIcon>Login
         </div>
       </NavLink>
       <NavLink to="/register" className={styles.link}>
         <div className={styles.wrapper}>
-          <LogoutIcon sx={{ fontSize: 16, marginRight: 0.75 }}></LogoutIcon>
+          <LogoutIcon sx={{ fontSize: 26, marginRight: 0.75 }}></LogoutIcon>
           Register
         </div>
       </NavLink>

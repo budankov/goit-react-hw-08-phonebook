@@ -12,6 +12,7 @@ const RegisterForm = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
+  console.log(state);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

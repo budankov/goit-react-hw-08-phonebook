@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 
-import styles from './TextField.module.scss';
+import './TextField.module.scss';
 
 const TextField = ({ label, hadleChange, ...props }) => {
   const id = useMemo(() => nanoid(), []);

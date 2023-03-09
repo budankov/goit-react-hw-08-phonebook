@@ -1,3 +1,5 @@
+import RegisterForm from 'components/RegisterForm/RegisterForm';
+
 import styles from './styles.module.scss';
 
 const RegisterPage = () => {
@@ -7,11 +9,7 @@ const RegisterPage = () => {
         <div className={styles.contactBook}>
           <h1 className={styles.title}>Phonebook</h1>
           <div className={styles.mainContainer}>
-            <h2 className={styles.subTitle}>Welcome to the Phonebook</h2>
-            <p className={styles.subTitle}>
-              Dear User, in order to use the application, you need to Register
-              or LogIn if you already have an account.
-            </p>
+            <RegisterForm />
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@
 
 // export default App;
 
-import { useEffect, lazy } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -45,34 +45,47 @@ const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <Routes>
-      <Route path="/" element={<HomePage />}>
-        <Route
-          index
-          element={
-            <PublicRoute redirectTo="/contacts" component={<HomePage />} />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PublicRoute redirectTo="/contacts" component={<RegisterPage />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute redirectTo="/contacts" component={<LoginPage />} />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Phonebook />} />
-          }
-        />
-      </Route>
-    </Routes>
+    <Suspense fallback={<p>...loading</p>}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/phonebook" element={<Phonebook />} />
+        </Route>
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </Suspense>
+    // <Routes>
+    //   <Route path="/" element={<HomePage />}>
+    //     <Route
+    //       index
+    //       element={
+    //         <PublicRoute redirectTo="/contacts" component={<HomePage />} />
+    //       }
+    //     />
+    //     <Route
+    //       path="/register"
+    //       element={
+    //         <PublicRoute redirectTo="/contacts" component={<RegisterPage />} />
+    //       }
+    //     />
+    //     <Route
+    //       path="/login"
+    //       element={
+    //         <PublicRoute redirectTo="/contacts" component={<LoginPage />} />
+    //       }
+    //     />
+    //     <Route
+    //       path="/phonebook"
+    //       element={
+    //         <PrivateRoute redirectTo="/login" component={<Phonebook />} />
+    //       }
+    //     />
+    //   </Route>
+    // </Routes>
   );
 };
 

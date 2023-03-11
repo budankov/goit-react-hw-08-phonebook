@@ -2,19 +2,19 @@ const fields = {
   name: {
     type: 'text',
     name: 'name',
-    require: true,
+    required: true,
     label: 'User name',
   },
   email: {
     type: 'email',
     name: 'email',
-    require: true,
+    required: true,
     label: 'User email',
   },
   password: {
     type: 'password',
     name: 'password',
-    require: true,
+    required: true,
     label: 'User password',
   },
 };

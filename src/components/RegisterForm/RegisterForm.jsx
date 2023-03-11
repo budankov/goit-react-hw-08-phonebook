@@ -12,13 +12,17 @@ const RegisterForm = ({ onSubmit }) => {
     initialState,
     onSubmit,
   });
-  console.log(state);
+  const { name, email, password } = state;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <TextField hadleChange={handleChange} {...fields.name} />
-      <TextField hadleChange={handleChange} {...fields.email} />
-      <TextField hadleChange={handleChange} {...fields.password} />
+      <TextField value={name} hadleChange={handleChange} {...fields.name} />
+      <TextField value={email} hadleChange={handleChange} {...fields.email} />
+      <TextField
+        value={password}
+        hadleChange={handleChange}
+        {...fields.password}
+      />
       <Button>Register</Button>
     </form>
   );

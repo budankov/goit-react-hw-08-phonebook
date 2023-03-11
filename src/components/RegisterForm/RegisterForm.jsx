@@ -1,30 +1,50 @@
-import useForm from 'shared/hooks/useForm';
-import TextField from 'shared/TextField/TextField';
-import Button from 'shared/Button/Button';
-import fields from './fields';
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { registration } from 'redux/auth/operations';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import registerSchema from './Yup';
 
-import initialState from './initialState';
-
-import styles from './RegisterForm.module.scss';
-
-const RegisterForm = ({ onSubmit }) => {
-  const { state, handleChange, handleSubmit } = useForm({
-    initialState,
-    onSubmit,
+const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(registerSchema),
   });
-  const { name, email, password } = state;
+  const onSubmit = data => {
+    dispatch(registration(data));
+    reset();
+  };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <TextField value={name} hadleChange={handleChange} {...fields.name} />
-      <TextField value={email} hadleChange={handleChange} {...fields.email} />
-      <TextField
-        value={password}
-        hadleChange={handleChange}
-        {...fields.password}
-      />
-      <Button>Register</Button>
-    </form>
+    <div>
+      <h2>Register Here</h2>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <label>
+          <input {...register('name')} />
+          <span>Username</span>
+          {errors.name && <p>{errors.name.message}</p>}
+        </label>
+        <label>
+          <input {...register('email')} />
+          <span>Email</span>
+          {errors.email && <p>{errors.email.message}</p>}
+        </label>
+        <label>
+          <input {...register('password')} />
+          <span>Password</span>
+          {errors.password && <p>{errors.password.message}</p>}
+        </label>
+        <button type="submit">Register</button>
+        <span>
+          Have an account? <NavLink to="/login">LogIn</NavLink>
+        </span>
+      </form>
+    </div>
   );
 };
 

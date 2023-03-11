@@ -5,6 +5,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from './Yup';
 
+//MUI
+import Button from '@mui/material/Button';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+
+import styles from './RegisterForm.module.scss';
+
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const {
@@ -22,27 +28,44 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <h2>Register Here</h2>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+      <h2>Registration form</h2>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <label>
+          <p>Username</p>
           <input {...register('name')} />
-          <span>Username</span>
-          {errors.name && <p>{errors.name.message}</p>}
+          {errors.name && (
+            <p className={styles.errorsMassage}>{errors.name.message}</p>
+          )}
         </label>
         <label>
+          <p>Email</p>
           <input {...register('email')} />
-          <span>Email</span>
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && (
+            <p className={styles.errorsMassage}>{errors.email.message}</p>
+          )}
         </label>
         <label>
+          <p>Password</p>
           <input {...register('password')} />
-          <span>Password</span>
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && (
+            <p className={styles.errorsMassage}>{errors.password.message}</p>
+          )}
         </label>
-        <button type="submit">Register</button>
-        <span>
-          Have an account? <NavLink to="/login">LogIn</NavLink>
-        </span>
+        <Button
+          type="submit"
+          variant="contained"
+          size="small"
+          sx={{
+            backgroundColor: '#4caf50',
+            '&:hover': { backgroundColor: '#29972c' },
+          }}
+          startIcon={<AppRegistrationIcon />}
+        >
+          Register
+        </Button>
+        <p className={styles.authScreenNavigation}>
+          Have an account? <NavLink to="/login"> LogIn</NavLink>
+        </p>
       </form>
     </div>
   );

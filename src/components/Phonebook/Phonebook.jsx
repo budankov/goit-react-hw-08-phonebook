@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operations';
+import { logOut } from 'redux/auth/operations';
 import { getError, getIsLoading } from 'redux/contacts/selectors';
 
 import ContactForm from 'components/ContactForm/ContactForm';
@@ -24,6 +25,9 @@ const Phonebook = () => {
       <div className={styles.containerBcg}>
         <div className={styles.contactBook}>
           <h1 className={styles.title}>Phonebook</h1>
+          <button type="button" onClick={() => dispatch(logOut())}>
+            Logout
+          </button>
           <ContactForm />
           <h2 className={styles.subTitle}>Contacts</h2>
           <ContactFilter />

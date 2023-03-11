@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { registration } from 'redux/auth/operations';
+import { logIn } from 'redux/auth/operations';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from './Yup';
@@ -22,7 +22,7 @@ const LoginForm = () => {
     resolver: yupResolver(loginSchema),
   });
   const onSubmit = data => {
-    dispatch(registration(data));
+    dispatch(logIn(data));
     reset();
   };
 
@@ -54,7 +54,7 @@ const LoginForm = () => {
           }}
           startIcon={<LoginIcon />}
         >
-          Register
+          Login
         </Button>
         <p className={styles.authScreenNavigation}>
           Not a member? <NavLink to="/register"> Register</NavLink>

@@ -28,23 +28,29 @@ const App = () => {
         <Route
           index
           element={
-            <PublicRoute redirectTo="/phonebook" component={<HomePage />} />
+            <PublicRoute redirectTo="/contacts" component={<HomePage />} />
           }
         />
         <Route
           path="/register"
           element={
-            <PublicRoute redirectTo="/phonebook" component={<RegisterPage />} />
+            <PublicRoute redirectTo="/contacts" component={<RegisterPage />} />
           }
         />
         <Route
           path="/login"
           element={
-            <PublicRoute redirectTo="/phonebook" component={<LoginPage />} />
+            <PublicRoute redirectTo="/contacts" component={<LoginPage />} />
           }
         />
         <Route
-          path="/phonebook"
+          path="*"
+          element={
+            <PublicRoute redirectTo="/contacts" component={<HomePage />} />
+          }
+        />
+        <Route
+          path="/contacts"
           element={
             <PrivateRoute redirectTo="/login" component={<Phonebook />} />
           }

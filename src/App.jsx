@@ -1,11 +1,11 @@
-import { useEffect, lazy } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PublicRoute/PublicRoute';
-import Layout from 'components/Layout/Layout';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'shared/hooks/useAuth';
+import Loader from 'components/Loader/Loader';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -21,10 +21,10 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Loader />
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
+    <Suspense fallback={<Loader />}>
+      <Routes>
         <Route
           index
           element={
@@ -49,8 +49,9 @@ const App = () => {
             <PrivateRoute redirectTo="/login" component={<Phonebook />} />
           }
         />
-      </Route>
-    </Routes>
+      </Routes>
+      <Outlet />
+    </Suspense>
   );
 };
 
